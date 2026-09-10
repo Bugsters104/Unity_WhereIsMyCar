@@ -7,6 +7,7 @@ public class DragAndDropScript : MonoBehaviour,
     public GameObjectsScript gameObjectsScript;
     private CanvasGroup canvasGroup;
     private RectTransform rectTransform;
+    public ScreenBoundariesScript screenBoundariesScript;
 
     void Awake()
     {
@@ -18,6 +19,7 @@ public class DragAndDropScript : MonoBehaviour,
 
         rectTransform = GetComponent<RectTransform>();
         gameObjectsScript = Object.FindFirstObjectByType<GameObjectsScript>();
+        screenBoundariesScript = Object.FindFirstObjectByType<ScreenBoundariesScript>();
     }
 
 
@@ -40,18 +42,40 @@ public class DragAndDropScript : MonoBehaviour,
             int positionIndex = Mathf.Max(0, lastIndex - 1);
             transform.SetSiblingIndex(positionIndex);
 
-            // Izstrādāsim ScreenBoudnries un tad varēs taisīt pārvietošanu...
+            Vector3 cursorWorldPos = Camera.main.ScreenToWorldPoint(new Vector3(
+                Input.mousePosition.x, Input.mousePosition.y,
+                screenBoundariesScript.screenPoint.z));
+            rectTransform.position = cursorWorldPos;
+            screenBoundariesScript.screenPoint = 
+                Camera.main.WorldToScreenPoint(rectTransform.localPosition);
+
+            screenBoundariesScript.offset = rectTransform.localPosition - 
+                Camera.main.ScreenToWorldPoint(new Vector3(
+                    Input.mousePosition.x, Input.mousePosition.y,
+                    screenBoundariesScript.screenPoint.z));
+            GameObjectsScript.lastDragged = eventData.pointerDrag;
         }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-      
+      if(Input.GetMouseButton(0) && !Input.GetMouseButton(1) && !Input.GetMouseButton(2))
+        {
+            Vector3 cursScreenPoint = 
+              new Vector3(Input.mousePosition.x, 
+              Input.mousePosition.y, 
+              screenBoundariesScript.screenPoint.z);
+            Vector3 curPosition 
+                = Camera.main.ScreenToWorldPoint(cursScreenPoint) + 
+                  screenBoundariesScript.offset;
+
+            rectTransform.position = screenBoundariesScript.GetClampedPosition(curPosition);
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-      if(Input.GetMouseButton(0))
+      if(Input.GetMouseButtonUp(0))
         {
             GameObjectsScript.isDragging = false;
             Debug.Log("OnEndDrag called for " + gameObject.name);

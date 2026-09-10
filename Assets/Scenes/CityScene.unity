@@ -363,6 +363,7 @@ GameObject:
   m_Component:
   - component: {fileID: 449420541}
   - component: {fileID: 449420542}
+  - component: {fileID: 449420543}
   m_Layer: 0
   m_Name: ScriptHolder
   m_TagString: Untagged
@@ -411,6 +412,25 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9fd190caa7bd53346af74d5064e02bcd, type: 3}
   - {fileID: 8300000, guid: a8208f1ae31c4294fa438c10c7091439, type: 3}
   inRightPlace: 0
+--- !u!114 &449420543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449420540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18a805cf77ad8f14997876bb8f600053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenPoint: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 0, z: 0}
+  minX: 0
+  maxX: 0
+  minY: 0
+  maxY: 0
+  reductionFactor: 0.02
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -734,6 +754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObjectsScript: {fileID: 0}
+  screenBoundariesScript: {fileID: 0}
 --- !u!1 &924728429
 GameObject:
   m_ObjectHideFlags: 0
@@ -1040,6 +1061,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObjectsScript: {fileID: 0}
+  screenBoundariesScript: {fileID: 0}
 --- !u!1 &1487934264
 GameObject:
   m_ObjectHideFlags: 0
@@ -1209,6 +1231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObjectsScript: {fileID: 0}
+  screenBoundariesScript: {fileID: 0}
 --- !u!225 &1816661014
 CanvasGroup:
   m_ObjectHideFlags: 0
