@@ -5,6 +5,7 @@ public class GameObjectsScript : MonoBehaviour
     public GameObject garbageTruck;
     public GameObject medicine;
     public GameObject schoolBuss;
+    // Vēlāk jāpievieno pārējās mašīnas un to sākuma koordinātas...
 
     [HideInInspector] 
     public Vector2 garbageTruckCoord;
