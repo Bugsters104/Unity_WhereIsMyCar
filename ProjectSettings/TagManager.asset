@@ -7,6 +7,7 @@ TagManager:
   - Garbage
   - Ambulance
   - School
+  - Bomb
   layers:
   - Default
   - TransparentFX

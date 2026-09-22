@@ -418,6 +418,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9fd190caa7bd53346af74d5064e02bcd, type: 3}
   - {fileID: 8300000, guid: a8208f1ae31c4294fa438c10c7091439, type: 3}
   - {fileID: 8300000, guid: f59ef0e19896a424ca4c1e60a1d4afb4, type: 3}
+  - {fileID: 8300000, guid: df4ac1fa40f1a2649887bcea2a846f8a, type: 3}
+  - {fileID: 8300000, guid: c015f08301e0b444dbfd43dfc04a0a62, type: 3}
   inRightPlace: 0
 --- !u!114 &449420543
 MonoBehaviour:
@@ -465,8 +467,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cloudPrefabs:
   - {fileID: 7691069507174795518, guid: 958162660bc4c4b4d813271495dcc7e1, type: 3}
+  - {fileID: 5700609568156692340, guid: 5c0b2173970fca24abd73957664a6b3d, type: 3}
+  - {fileID: 1725050914655773968, guid: 121263de06cd2624bbeda9cfb39fdcaf, type: 3}
   plainPrefabs:
   - {fileID: 1973544003872700676, guid: 2e40e217187ddcf4dad0afafc33560dc, type: 3}
+  - {fileID: 8984870216916440400, guid: b2bb8dafb7dc5b24995bab1cde9eb51d, type: 3}
+  - {fileID: 1725050914655773968, guid: 121263de06cd2624bbeda9cfb39fdcaf, type: 3}
   spawnPoint: {fileID: 744828731}
   cloudSpawnInterval: 2
   plainSpawnInterval: 3
