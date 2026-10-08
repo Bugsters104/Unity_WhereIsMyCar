@@ -46,7 +46,8 @@ public class CameraZoomScript : MonoBehaviour
     {
         startZoom = mainCamera.orthographicSize;
         screenBoundariesScript.RecalculateBounds();
-        transform.position = screenBoundariesScript.GetClampedPosition(transform.position);
+        // -- 3. kļūda --- izsaucu nepareizo metodi
+        transform.position = screenBoundariesScript.GetClampedCameraPosition(transform.position);
     }
 
     void Update()
@@ -73,33 +74,17 @@ public class CameraZoomScript : MonoBehaviour
         UpdateMaxZoom();
         mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, minZoom, maxZoom);
         screenBoundariesScript.RecalculateBounds();
-        transform.position = screenBoundariesScript.GetClampedPosition(transform.position);
+        // -- 4. kļūda ---
+        transform.position = screenBoundariesScript.GetClampedCameraPosition(transform.position);
     }
 
-    void DesktopFollowCursor()
-    {
-        Vector3 mousePos = Input.mousePosition;
-        if(mousePos.x < 0 || mousePos.x > Screen.width ||
-            mousePos.y < 0 || mousePos.y > Screen.height)
-        {
-            return;
-        }
-
-        Vector3 screenPoint = new Vector3(mousePos.x, mousePos.y, mainCamera.nearClipPlane);
-        Vector3 targetWorld = mainCamera.ScreenToWorldPoint(screenPoint);
-        Vector3 targetPosition = new Vector3(targetWorld.x, targetWorld.y, transform.position.z);
-
-        transform.position = 
-        Vector3.Lerp(transform.position, targetPosition, mouseFollowSpeed * Time.unscaledDeltaTime);
-    }
-
-    void HandlePinch()
+    // -- 1. kļūda ---
+    void HandleTouc()
     {
         if (Input.touchCount != 1)
             return;
 
         Touch touch = Input.GetTouch(0);
-
         if (IsTouchUIButton(touch.position))
             return;
 
@@ -111,7 +96,6 @@ public class CameraZoomScript : MonoBehaviour
             {
                 StartCoroutine(ResetZoomSmooth());
                 lastTapTime = 0f;
-
             }
             else
             {
@@ -135,7 +119,37 @@ public class CameraZoomScript : MonoBehaviour
         {
             isTouchPan = false;
             panFingerId = -1;
+
         }
+    }
+
+    void DesktopFollowCursor()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        if(mousePos.x < 0 || mousePos.x > Screen.width ||
+            mousePos.y < 0 || mousePos.y > Screen.height)
+        {
+            return;
+        }
+
+        Vector3 screenPoint = new Vector3(mousePos.x, mousePos.y, mainCamera.nearClipPlane);
+        Vector3 targetWorld = mainCamera.ScreenToWorldPoint(screenPoint);
+        Vector3 targetPosition = new Vector3(targetWorld.x, targetWorld.y, transform.position.z);
+
+        transform.position = 
+        Vector3.Lerp(transform.position, targetPosition, mouseFollowSpeed * Time.unscaledDeltaTime);
+    }
+
+    // -- 2. kļūda --- esošais kods iet iekšā HandleTouc()
+    void HandlePinch()
+    {
+        Touch touch0 = Input.GetTouch(0);
+        Touch touch1 = Input.GetTouch(1);
+        float prevDistance = 
+        (touch0.position - touch0.deltaPosition - 
+        (touch1.position - touch1.deltaPosition)).magnitude;
+        float currentDistance = (touch0.position - touch1.position).magnitude;  
+        mainCamera.orthographicSize -= (currentDistance - prevDistance) * pinchZoomSpeed;
     }
 
     bool IsTouchUIButton(Vector2 touchPosition)
@@ -175,16 +189,18 @@ public class CameraZoomScript : MonoBehaviour
             mainCamera.orthographicSize = 
                 Mathf.Lerp(currentZoom, targetZoom, elpased / duration);
            screenBoundariesScript.RecalculateBounds();
+            // -- 5. kļūda ---
             transform.position = 
-                screenBoundariesScript.GetClampedPosition(transform.position);
+                screenBoundariesScript.GetClampedCameraPosition(transform.position);
 
             yield return null;
         }
 
         mainCamera.orthographicSize = targetZoom;
         screenBoundariesScript.RecalculateBounds();
+        // -- 5. kļūda ---
         transform.position = 
-            screenBoundariesScript.GetClampedPosition(transform.position);
+            screenBoundariesScript.GetClampedCameraPosition(transform.position);
     }
 
     void UpdateMaxZoom()
