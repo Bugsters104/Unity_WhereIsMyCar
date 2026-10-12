@@ -19,7 +19,6 @@ public class CameraZoomScript : MonoBehaviour
     public ScreenBoundariesScript screenBoundariesScript;
 
     public Camera mainCamera;
-    float startZoom;
     Vector2 lastTouchPos;
     int panFingerId = -1;
     bool isTouchPan = false;
@@ -44,7 +43,6 @@ public class CameraZoomScript : MonoBehaviour
 
     private void Start()
     {
-        startZoom = mainCamera.orthographicSize;
         screenBoundariesScript.RecalculateBounds();
         // -- 3. kļūda --- izsaucu nepareizo metodi
         transform.position = screenBoundariesScript.GetClampedCameraPosition(transform.position);
@@ -79,7 +77,7 @@ public class CameraZoomScript : MonoBehaviour
     }
 
     // -- 1. kļūda ---
-    void HandleTouc()
+    void HandleTouch()
     {
         if (Input.touchCount != 1)
             return;
@@ -143,11 +141,12 @@ public class CameraZoomScript : MonoBehaviour
     // -- 2. kļūda --- esošais kods iet iekšā HandleTouc()
     void HandlePinch()
     {
-        Touch touch0 = Input.GetTouch(0);
-        Touch touch1 = Input.GetTouch(1);
+        Touch touch0 = Input.GetTouch(0), 
+            touch1 = Input.GetTouch(1);
         float prevDistance = 
-        (touch0.position - touch0.deltaPosition - 
+        ((touch0.position - touch0.deltaPosition) - 
         (touch1.position - touch1.deltaPosition)).magnitude;
+
         float currentDistance = (touch0.position - touch1.position).magnitude;  
         mainCamera.orthographicSize -= (currentDistance - prevDistance) * pinchZoomSpeed;
     }
