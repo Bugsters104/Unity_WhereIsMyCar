@@ -8,6 +8,7 @@ TagManager:
   - Ambulance
   - School
   - Bomb
+  - InterstitialAdButton
   layers:
   - Default
   - TransparentFX

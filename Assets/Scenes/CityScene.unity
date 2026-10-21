@@ -2862,7 +2862,7 @@ GameObject:
   - component: {fileID: 1774203787}
   m_Layer: 0
   m_Name: InterstitialAd
-  m_TagString: Untagged
+  m_TagString: InterstitialAdButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
