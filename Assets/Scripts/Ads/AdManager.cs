@@ -9,6 +9,9 @@ public class AdManager : MonoBehaviour
     [SerializeField] bool turnOffInterstitialAds = false;
     private bool firstAdShown = false;
 
+    public RewardedAds rewardedAds;
+    [SerializeField] bool turnOffRewardedAds = false;
+
     public static AdManager Instance { get; private set; }
 
     private bool firstSceneLoaded = false;
@@ -40,6 +43,10 @@ public class AdManager : MonoBehaviour
             interstitialAd.LoadAd();
         }
 
+        if (!turnOffRewardedAds)
+        {
+            rewardedAds.LoadAd();
+        }
         // Vēlāk papildināsim priekš pārējām reklāmām
     }
 
@@ -77,6 +84,16 @@ public class AdManager : MonoBehaviour
         if(interstitialAd != null && interstitialButton != null)
         {
             interstitialAd.SetButton(interstitialButton);
+        }
+
+        if(rewardedAds == null)
+            rewardedAds = FindFirstObjectByType<RewardedAds>();
+
+        Button rewardedAdButton = 
+          GameObject.FindGameObjectWithTag("RewardedAdButton").GetComponent<Button>();
+        if(rewardedAds != null && rewardedAdButton != null)
+        {
+           rewardedAds.SetButton(rewardedAdButton);
         }
 
         // Vēlāk jāpapildina ar pārējām pogām
