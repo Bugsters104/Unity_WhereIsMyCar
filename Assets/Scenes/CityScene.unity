@@ -1330,7 +1330,7 @@ GameObject:
   - component: {fileID: 708787493}
   m_Layer: 0
   m_Name: BannerAd
-  m_TagString: Untagged
+  m_TagString: BannerAdButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2480,6 +2480,9 @@ GameObject:
   - component: {fileID: 1369066093}
   - component: {fileID: 1369066090}
   - component: {fileID: 1369066092}
+  - component: {fileID: 1369066095}
+  - component: {fileID: 1369066094}
+  - component: {fileID: 1369066096}
   m_Layer: 0
   m_Name: AdsScriptHolder
   m_TagString: Untagged
@@ -2546,6 +2549,53 @@ MonoBehaviour:
   adsInitializer: {fileID: 1369066090}
   interstitialAd: {fileID: 1369066092}
   turnOffInterstitialAds: 0
+  rewardedAds: {fileID: 1369066095}
+  turnOffRewardedAds: 0
+  bannerAd: {fileID: 1369066096}
+  turnOffBannerAds: 0
+--- !u!114 &1369066094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369066089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a7be7c96d332a5448980885647644b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1369066095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369066089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84fe0b680d276b2408a7cf40ab89e54e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _androidAdUnitId: Rewarded_Android
+  _rewardedAdButton: {fileID: 1384707595}
+  flyingObjectManager: {fileID: 1369066094}
+--- !u!114 &1369066096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369066089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67a86fe8fd09bf74b9a63aa4b692723d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _AndroidAdUnitId: Banner_Android
+  _bannerButton: {fileID: 708787493}
+  isBannerVisible: 0
+  bannerPosition: 4
 --- !u!1 &1384707593
 GameObject:
   m_ObjectHideFlags: 0
@@ -2560,7 +2610,7 @@ GameObject:
   - component: {fileID: 1384707595}
   m_Layer: 0
   m_Name: RewardedAd
-  m_TagString: Untagged
+  m_TagString: RewardedAdButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

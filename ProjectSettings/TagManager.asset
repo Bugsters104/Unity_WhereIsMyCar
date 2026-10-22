@@ -9,6 +9,8 @@ TagManager:
   - School
   - Bomb
   - InterstitialAdButton
+  - RewardedAdButton
+  - BannerAdButton
   layers:
   - Default
   - TransparentFX
